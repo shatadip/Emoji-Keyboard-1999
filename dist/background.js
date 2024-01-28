@@ -1,4 +1,5 @@
 // background.js
+
 chrome.runtime.onInstalled.addListener(function () {
     chrome.tabs.query({}, function (tabs) {
       tabs.forEach(function (tab) {
