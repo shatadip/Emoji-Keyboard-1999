@@ -20,6 +20,28 @@ function App() {
   const [popupPosition, setPopupPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 }); // in px
   const emojiRef = useRef<HTMLDivElement>(null);
 
+  // useEffect(() => {
+  //   const handleClick = (event: MouseEvent) => {
+  //     if (emojiRef.current && event.target instanceof Node && !emojiRef.current.contains(event.target as Node)) {
+  //       const emojiRect = emojiRef.current.getBoundingClientRect();
+  //       const topPosition = event.clientY - emojiRect.height;
+  //       const leftPosition = event.clientX - emojiRect.width / 2;
+  //       setPopupPosition({ top: topPosition, left: leftPosition });
+  //       setShowPopup(true);
+  //     }
+  //   };
+
+  //   document.addEventListener('click', handleClick);
+
+  //   return () => {
+  //     document.removeEventListener('click', handleClick);
+  //   };
+  // }, []);
+
+  // const addEmoji = (emoji: any) => {
+  //   setSelectedEmoji(emoji.native);
+  // };
+
   const addEmoji = (emoji: any) => {
     setSelectedEmoji(emoji.native);
     const emojiElement = emojiRef.current;
@@ -68,6 +90,11 @@ function App() {
 
   return (
     <div>
+      {/* emoji picker 1999 title and logo */}
+      <div className="header">
+        <h1>Emoji Picker 1999</h1>
+        {/* <img src="logo.png" alt="Emoji Picker 1999 logo" /> */}
+      </div>
       <EmojiPicker
         data={appleEmojisData}
         set="apple"
