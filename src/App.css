@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+em-emoji-picker {
+  --border-radius: 0!important;
+}
+
+.header {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1ch;
+}
+.header img {
+  width: 27px;
+  height: 27px;
+}

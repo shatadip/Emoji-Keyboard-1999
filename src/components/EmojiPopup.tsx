@@ -5,19 +5,17 @@ interface EmojiPopupProps {
     emoji: string;
     onInsert: () => void;
     onCopy: () => void;
-    position?: { top: number; left: number };
+    onClosePopup: () => void;
 }
 
-const EmojiPopup: React.FC<EmojiPopupProps> = ({ emoji, onInsert, onCopy, position }) => {
-    let { top, left } = position || { top: 0, left: 0 };
-    // alert(top + ' <> ' + left);
+const EmojiPopup: React.FC<EmojiPopupProps> = ({ emoji, onInsert, onCopy, onClosePopup }) => {
     return (
-        <div className="emoji-popup" style={{ top: top + 'px', left: left + 'px' }}>
-            <div className="arrow"></div>
+        <div className="emoji-popup">
             <span>{emoji}</span>
             <div className="options">
                 <button onClick={onInsert}>Insert at Cursor</button>
                 <button onClick={onCopy}>Copy</button>
+                <button onClick={onClosePopup}>&times;</button>
             </div>
         </div>
     );

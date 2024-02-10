@@ -17,83 +17,40 @@ function App() {
   // const [input, setInput] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState('');
-  const [popupPosition, setPopupPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 }); // in px
   const emojiRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   const handleClick = (event: MouseEvent) => {
-  //     if (emojiRef.current && event.target instanceof Node && !emojiRef.current.contains(event.target as Node)) {
-  //       const emojiRect = emojiRef.current.getBoundingClientRect();
-  //       const topPosition = event.clientY - emojiRect.height;
-  //       const leftPosition = event.clientX - emojiRect.width / 2;
-  //       setPopupPosition({ top: topPosition, left: leftPosition });
-  //       setShowPopup(true);
-  //     }
-  //   };
 
-  //   document.addEventListener('click', handleClick);
-
-  //   return () => {
-  //     document.removeEventListener('click', handleClick);
-  //   };
-  // }, []);
-
-  // const addEmoji = (emoji: any) => {
-  //   setSelectedEmoji(emoji.native);
-  // };
 
   const addEmoji = (emoji: any) => {
     setSelectedEmoji(emoji.native);
     const emojiElement = emojiRef.current;
-    const POPUP_HEIGHT = 200; // in px
-    const POPUP_WIDTH = 250; // in px
-    
+
+
     if (emojiElement) {
-      const emojiRect = emojiElement.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const viewportWidth = window.innerWidth;
-      const emojiTop = emojiRect.top + window.pageYOffset;
-      const emojiLeft = emojiRect.left + window.pageXOffset;
-  
-      let topPosition = emojiTop + emojiRect.height;
-      let leftPosition = emojiLeft + emojiRect.width / 2;
-  
-      // Adjust top position if the popup would extend below the viewport
-      if (topPosition + POPUP_HEIGHT > viewportHeight) {
-        topPosition = Math.max(0, emojiTop - POPUP_HEIGHT);
-      }
-  
-      // Adjust left position if the popup would extend beyond the right edge of the viewport
-      if (leftPosition + POPUP_WIDTH / 2 > viewportWidth) {
-        leftPosition = Math.max(0, emojiLeft + emojiRect.width - POPUP_WIDTH);
-      }
-  
-      setPopupPosition({ top: topPosition, left: leftPosition });
       setShowPopup(true);
     }
   };
-  
+  const handleClickOutside = () => {
+    setShowPopup(false);
+  };
   const handleCopy = () => {
     navigator.clipboard.writeText(selectedEmoji).then(() => {
       console.log('Emoji copied to clipboard:', selectedEmoji);
-      setShowPopup(false);
     }, (error) => {
       console.error('Failed to copy emoji to clipboard:', error);
-      setShowPopup(false);
     });
   };
 
   const handleInsert = () => {
     sendMessageToContentScript({ type: 'insertEmoji', emoji: selectedEmoji });
-    setShowPopup(false);
   };
 
   return (
     <div>
-      {/* emoji picker 1999 title and logo */}
+      {/* Emoji Keyboard 1999 title and logo */}
       <div className="header">
-        <h1>Emoji Picker 1999</h1>
-        {/* <img src="logo.png" alt="Emoji Picker 1999 logo" /> */}
+        <img src="icon.png" alt="Emoji Keyboard 1999 logo" />
+        <h2>Emoji Keyboard 1999</h2>
       </div>
       <EmojiPicker
         data={appleEmojisData}
@@ -101,13 +58,14 @@ function App() {
         previewPosition="none"
         autoFocus={true}
         onEmojiSelect={addEmoji}
+        // onClickOutside={handleClickOutside}
       />
       {showPopup && (
         <EmojiPopup
           emoji={selectedEmoji}
           onInsert={handleInsert}
           onCopy={handleCopy}
-          position={popupPosition}
+          onClosePopup={handleClickOutside}
         />
       )}
       <div ref={emojiRef}></div>
