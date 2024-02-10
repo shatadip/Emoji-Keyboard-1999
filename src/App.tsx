@@ -50,15 +50,19 @@ function App() {
       {/* Emoji Keyboard 1999 title and logo */}
       <div className="header">
         <img src="icon.png" alt="Emoji Keyboard 1999 logo" />
-        <h2>Emoji Keyboard 1999</h2>
+        <div className='text-holder-area'>
+          <h2>Emoji Keyboard 1999</h2>
+          <p className="version">v 1.0.0 | Shortcut: <kbd>Alt+Shift+W</kbd></p>
+        </div>
       </div>
+
       <EmojiPicker
         data={appleEmojisData}
         set="apple"
         previewPosition="none"
         autoFocus={true}
         onEmojiSelect={addEmoji}
-        // onClickOutside={handleClickOutside}
+      // onClickOutside={handleClickOutside}
       />
       {showPopup && (
         <EmojiPopup
