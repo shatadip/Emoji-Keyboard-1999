@@ -44,3 +44,10 @@ em-emoji-picker {
   align-items: flex-end;
   margin-top: 1.15rem;
 }
+
+.kbd-shortcut {
+  background-color: transparent;
+  padding: 2px 4px;
+  border: 1px solid #BCBCBC;
+  border-radius: 2px;
+}
