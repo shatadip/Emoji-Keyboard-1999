@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+}
 .emoji-popup {
     background-color: white;
     border-top: 1px solid #ddd;
@@ -30,6 +34,7 @@
     color: white;
     cursor: pointer;
     border-radius: 2px!important;
+    font-family: 'Inter', sans-serif;
   }
   
   .options button:hover {
