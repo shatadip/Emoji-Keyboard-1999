@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Emoji Keyboard 1999",
   "version": "1.0",
-  "description": "Integrate emojis into text fields.",
+  "description": "Lets you [Insert] and [Copy] Emojis. It's Fast, Reliable, Open Source, and Free!",
   "icons": {
     "128": "icon.png"
   },
