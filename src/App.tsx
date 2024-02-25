@@ -55,15 +55,22 @@ function App() {
   const handleClickOutside = () => {
     setShowPopup(false);
   };
-  const handleCopy = () => {
+  const handleCopy = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // Blur the button
+    event.currentTarget.blur();
+  
+    // Copy the emoji to clipboard
     navigator.clipboard.writeText(selectedEmoji).then(() => {
       console.log('Emoji copied to clipboard:', selectedEmoji);
     }, (error) => {
       console.error('Failed to copy emoji to clipboard:', error);
     });
   };
+  
 
-  const handleInsert = () => {
+  const handleInsert = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // Blur the button
+    event.currentTarget.blur();
     sendMessageToContentScript({ type: 'insertEmoji', emoji: selectedEmoji });
   };
   let color = "#5778a3";
